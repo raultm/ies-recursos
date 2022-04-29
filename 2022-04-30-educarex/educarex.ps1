@@ -3,7 +3,7 @@
 function Install-EAPGTC
 {
 	$name='EAP GTC x64' 
-	$url="https://raw.githubusercontent.com/raultm/ies-recursos/main/2022-04-30-educarex/EAP-GTC-x64.msi" 
+	$url="https://github.com/raultm/ies-recursos/raw/main/2022-04-30-educarex/EAP-GTC-x64.msi" 
 	$path="C:\ies\EAP-GTC-x64.msi"
 
 	""
