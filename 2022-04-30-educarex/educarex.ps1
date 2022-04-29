@@ -40,5 +40,6 @@ function Configure-Educarex
     "    $name Finalizada."
 }
 
+New-Item -ItemType directory -Force -Path C:\ies | Out-Null
 Install-EAPGTC
 Configure-Educarex
