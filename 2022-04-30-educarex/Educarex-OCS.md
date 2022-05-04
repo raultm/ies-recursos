@@ -20,9 +20,8 @@ Set-ExecutionPolicy Unrestricted -Force; iex ((New-Object System.Net.WebClient).
 ```
 
 ## 2. Usar Acceso Directo
-Método si quiere configurar muchos ordenadores a la vez, lo metes en un pen drive y vas pasando
 
-### 2.1 - Uso de los ficheros en Github
+### 2.1 - Uso de los ficheros en Github (pide dominio/servidorpuppet)
 1. Descargate el fichero de [Acceso Directo Github](https://github.com/raultm/ies-recursos/raw/main/2022-04-30-educarex/Educarex%20OCS%20Github.lnk)
 2. Ejecuta ese archivo donde quieras configurar la red
 
