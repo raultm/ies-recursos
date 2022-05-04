@@ -1,4 +1,11 @@
-# Set-ExecutionPolicy Unrestricted -Force; iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/raultm/ies-recursos/main/2022-04-30-educarex/educarex.ps1'))
+#
+#    educarex - Installs EAP-GTC & Configure educarex wifi
+#
+#    Authors: Raul Tierno <raultm@gmail.com>
+#
+#    Install from internet(need manual domain/server):
+#    Set-ExecutionPolicy Unrestricted -Force; iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/raultm/ies-recursos/main/2022-04-30-educarex/educarex.ps1'))
+#
 
 function Install-EAPGTC
 {
