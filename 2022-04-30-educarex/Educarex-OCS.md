@@ -34,6 +34,6 @@ Método si quiere configurar muchos ordenadores a la vez, lo metes en un pen dri
 
 ### 2.3 - Si quieres hacer el proceso sin tener que conectar previamente Usa Pendrive
 
-1. Pones los archivos de esta carpeta `2022-04-30-educarex` en el PenDrive `/var/www/html/educarex` y editas `educarex-ocs.ps1`
+1. Pones los archivos de esta carpeta `2022-04-30-educarex` en el PenDrive `E:/educarex` y editas `educarex-ocs.ps1`
 2. Descargate el fichero de [Acceso Directo USB E](https://github.com/raultm/ies-recursos/raw/main/2022-04-30-educarex/Educarex%20OCS%20USB%20E.lnk)
 3. Este Acceso Directo funciona si el pendrive se monta en `E:`, si no es así tendrás que modificar la unidad en el propio Acceso Directo
