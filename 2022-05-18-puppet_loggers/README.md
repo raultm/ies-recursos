@@ -1,0 +1,1 @@
+Puppet log temperatures
