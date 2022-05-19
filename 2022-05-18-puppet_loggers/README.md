@@ -7,9 +7,18 @@ Es un paquete puppet que registra las temperaturas de diferentes componentes de 
 - GPU
 - HDD
 
-va registrando los valores cada 10 minutos en el `/var/log/syslog` así ante cualquier reporte de incidencia se pueden consultar los historicos para comprobar si algun componente estaba funcionando mal.
+Va registrando los valores cada 10 minutos en el `/var/log/syslog` así ante cualquier reporte de incidencia se pueden consultar los historicos para comprobar si algun componente estaba funcionando mal.
 
 Comandos copiados en gran parte del artículo de Alfonso Pastor [Monitorizando los puestos del aula con monit (II)](http://2tazasdelinux.blogspot.com/2019/04/monitorizando-los-puestos-del-aula-con_25.html)
+
+## Ejemplo de Visualización
+
+Si queremos ver el historial del dia hay un comando que agiliza la búsqueda, si se llama sin argumentos muestra todas las lineas de registro de temperaturas
+```
+temp-viewlogs VGA
+```
+
+![Listado de temperaturas en Terminal](temp-vga.png)
 
 ## Uso
 
