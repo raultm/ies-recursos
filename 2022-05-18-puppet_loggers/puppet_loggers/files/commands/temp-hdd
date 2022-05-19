@@ -1,0 +1,13 @@
+#!/bin/bash
+
+HDDTEMP=0
+DISCOS=$(lsblk  -l | grep disk | cut -f1 -d" ")
+for i in $DISCOS
+do
+  TEMP=$(hddtemp  /dev/$i 2> /dev/null | tr -d "°C " | cut -d":" -f3)
+  test -z "$TEMP" && TEMP="0"
+  test "$TEMP" -gt "$HDDTEMP" && HDDTEMP="$TEMP"
+done
+
+/usr/local/sbin/temp-log "Hard Drive" $HDDTEMP
+exit $HDDTEMP

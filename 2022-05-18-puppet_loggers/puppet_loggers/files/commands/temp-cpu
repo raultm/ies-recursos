@@ -1,0 +1,15 @@
+#!/bin/bash
+hardware=$(facter hardware)
+CPUTEMP=0
+case $hardware in
+   "telefonica") CPUTEMP=$(sensors |grep "^CPU Temperature"| awk '{printf $3}'  | tr -d '+°C'  | awk '{printf("%d\n",$1 + 0.5)}')
+           ;;
+   "siatic") CPUTEMP=$(sensors |grep "^Package id"| awk '{printf $4}'  | tr -d '+°C' | awk '{printf("%d\n",$1 + 0.5)}')
+           ;;
+   "infolab") CPUTEMP=$(sensors |grep "^Package id"| awk '{printf $4}'  | tr -d '+°C' | awk '{printf("%d\n",$1 + 0.5)}')
+           ;;
+   * )  CPUTEMP=$(sensors |grep "^Core "| tr -d '+°C' |  awk '{printf("%d\n",$3 + 0.5)}'  | sort -nr | head -1) #El mayor de los cores
+        ;;
+esac
+/usr/local/sbin/temp-log "CPU" $CPUTEMP
+exit $CPUTEMP

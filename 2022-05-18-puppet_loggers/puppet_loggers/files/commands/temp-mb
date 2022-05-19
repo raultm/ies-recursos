@@ -1,0 +1,17 @@
+#!/bin/bash
+hardware=$(facter hardware)
+MBTEMP=0
+case $hardware in
+   "telefonica") MBTEMP=$(sensors |grep "^MB Temperature:"| awk '{printf $3}'  | tr -d '+°C'  | awk '{printf("%d\n",$1 + 0.5)}')
+           ;;
+   "siatic") MBTEMP=$(sensors | sed -n '/acpitz-virtual-0/,/^$/p' | grep "^temp" | tr -d '+°C' | awk '{printf("%d\n",$2 + 0.5)}' | sort -nr | head -1)
+           ;;
+   "infolab" ) MBTEMP=$(sensors | sed -n '/pch_skylake-virtual-0/,/^$/p' | grep "^temp" | tr -d '+°C' | awk '{printf("%d\n",$2 + 0.5)}' | sort -nr | head -1)
+           ;;
+
+   * ) MBTEMP=$(sensors | sed -n '/acpitz-virtual-0/,/^$/p' | grep "^temp" | tr -d '+°C' | awk '{printf("%d\n",$2 + 0.5)}' | sort -nr | head -1)
+
+        ;;
+esac
+/usr/local/sbin/temp-log "MotherBoard" $MBTEMP
+exit $MBTEMP
