@@ -1,0 +1,24 @@
+#!/bin/bash
+#   En val recogemos el valor entero del porcentaje
+#
+#   # df "/dev/sda2" 
+#   S.ficheros     bloques de 1K    Usados Disponibles Uso% Montado en
+#   /dev/sda2          961107288 591965552   320297244  65% /home
+#   
+#   # tail -1 
+#   /dev/sda2          961107288 591965552   320297244  65% /home
+#
+#   # tr -s ' '
+#   /dev/sda2 961107288 591959096 320303700 65% /home
+#   
+#   # cut -d ' ' -f5
+#   65%
+#
+#   # tr -d '%'
+#   65
+
+min=70
+val=$(df "/dev/sda2"|tail -1|tr -s ' '|cut -d ' ' -f5|tr -d '%')
+
+/root/utilidades/scripts/Alertas/checkfeature disk $min $val
+

@@ -1,0 +1,27 @@
+#!/bin/bash
+IP=$1
+ARCHIVO=/root/utilidades/scripts/Alertas/flags/$IP
+ping -c1 $IP 2>/dev/null 1>/dev/null
+
+# Si el ping da error...
+if [ 1 -eq $? ]
+then
+  # ... y no hemos existe el archivo de alerta
+  if [ ! -f $ARCHIVO ]
+  then
+    # Mandamos notificación
+    /root/utilidades/scripts/Alertas/notification "[Maquina] $IP está caída"
+    # Creamos el archivo
+    echo "" > $ARCHIVO
+  fi
+# Si el ping ha ido bien...
+else
+  # ... y tenemos el archivo de que estaba caída la máquina
+  if [ -f $ARCHIVO ]
+  then
+    # Mandamos notificación
+    /root/utilidades/scripts/Alertas/notification "[Maquina] $IP se ha levantado"
+    # Borramos archivo
+    rm $ARCHIVO
+  fi
+fi

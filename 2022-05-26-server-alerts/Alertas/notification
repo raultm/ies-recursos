@@ -1,0 +1,7 @@
+#!/bin/bash
+
+# Añadir al log /var/log/syslog
+logger --tag "ies" -s "$1"
+
+# Enviar notificacion telegram
+# /root/utilidades/telegram "$1"

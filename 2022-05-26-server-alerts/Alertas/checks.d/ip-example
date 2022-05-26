@@ -1,0 +1,4 @@
+#!/bin/bash
+
+/root/utilidades/scripts/Alertas/checkip 1.1.1.1
+

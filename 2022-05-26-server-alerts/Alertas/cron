@@ -1,0 +1,4 @@
+#!/bin/bash
+
+/root/utilidades/scripts/Alertas/triggerchecks
+
