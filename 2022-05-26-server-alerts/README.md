@@ -27,7 +27,7 @@ scp ./Alertas root@servidor:/root/utilidades/scripts/
 Si prefieres tenerlo en otra carpeta tendrás que modificar las referencias a los comandos.
 
 ```
-grep -rl "/root/utilidades/scripts/" . | sed -i 's/\/root\/utilidades\/scripts\//\/path\/to\/route\//g'
+grep -rl "/root/utilidades/scripts/" . | xargs sed -i 's/\/root\/utilidades\/scripts\//\/path\/to\/route\//g'
 ```
 
 Modificando **\/path\/to\/route\/** por la ruta donde lo hayas puesto tu.
