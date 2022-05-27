@@ -22,6 +22,14 @@ temp-viewlogs VGA
 
 ## Uso
 
+Descargar el zip y descomprimir
+
+```
+wget https://github.com/raultm/ies-recursos/raw/main/2022-05-18-puppet_loggers/puppet_loggers.zip
+
+unzip  puppet_loggers.zip
+```
+
 Copiar la carpeta `puppet_loggers` en la carpeta de nuestro servidor puppet `/etc/puppet/modules`
 
 Si estas en la carpeta descargada puedes hacerlo con el siguiente comando
