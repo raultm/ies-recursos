@@ -16,7 +16,14 @@ Objetivos de este repo
 
 # Uso
 
-Copiar la carpeta `Alertas` 
+Descargar el zip y descomprimir
+
+```
+wget https://github.com/raultm/ies-recursos/raw/main/2022-05-26-server-alerts/Alertas.zip
+
+unzip  Alertas.zip
+```
+Copiar la carpeta `Alertas` al servidor
 
 Por motivos legados tenemos esta carpeta en `/root/utilidades/scripts`, si tiene la misma estructura puedes copiar directamente
 
