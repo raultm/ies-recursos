@@ -17,7 +17,7 @@ Desde que está puesta la tarea se han reducido al mínimo las incidencias
 Descargar el zip, descomprimir y  copiar la carpeta `puppet_printers_reset` en la carpeta de nuestro servidor puppet `/etc/puppet/modules`
 
 ```
-wget https://github.com/raultm/ies-recursos/raw/main/2022-05-18-puppet_loggers/puppet_loggers.zip
+wget https://github.com/raultm/ies-recursos/releases/download/printers_reset_1.0.0/puppet_printers_reset.zip
 
 unzip  puppet_printers_reset.zip
 
