@@ -25,7 +25,7 @@ temp-viewlogs VGA
 Descargar el zip y descomprimir
 
 ```
-wget https://github.com/raultm/ies-recursos/raw/main/2022-05-18-puppet_loggers/puppet_loggers.zip
+wget https://github.com/raultm/ies-recursos/releases/download/puppet_loggers_1.0.0/puppet_loggers.zip
 
 unzip  puppet_loggers.zip
 ```
