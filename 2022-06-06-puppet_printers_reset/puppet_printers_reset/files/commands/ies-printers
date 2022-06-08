@@ -1,2 +1,8 @@
 #!/bin/bash 
-cancel -a
+function removePrintersQueuesOnlyIfNotRootUser {
+    if [ "$(whoami)" != "root" ]; then
+        cancel -a
+    fi
+}
+
+removePrintersQueuesOnlyIfNotRootUser
