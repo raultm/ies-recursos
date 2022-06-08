@@ -92,3 +92,5 @@ El paquete añade archivos en profile.d, sudoers.d y un comando local
   <dd>Los archivos que ha sido modificados (actualizados/eliminados). La diferencia entre la última copia que existía y la que se acaba de realizar.</dd>
 </dl>
 
+
+![Visualización de el árbol de directorios con el comando tree](images/treel2backups.png)
