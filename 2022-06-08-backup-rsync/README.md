@@ -85,10 +85,10 @@ El paquete añade archivos en profile.d, sudoers.d y un comando local
   <dt><strong>/root/backups/FinCopiaIncremental</strong></dt>
   <dd>La fecha de la última copia correcta. A modo informativo</dd>
   <dt><strong>/root/backups/excludes/servidor.excluded</strong></dt>
-  <dd>Las rutas de las que no queremos hacer copias de seguridad</dd>
-  <dt><strong>/root/backups/excludes/main</strong></dt>
+  <dd>Las rutas de carpetas de las que no queremos hacer copias de seguridad</dd>
+  <dt><strong>/root/backups/servidor/main</strong></dt>
   <dd>La última copia de seguridad realizada</dd>
-  <dt><strong>/root/backups/excludes/<i>YYYY-MM-DD</i></strong></dt>
+  <dt><strong>/root/backups/servidor/<i>YYYY-MM-DD</i></strong></dt>
   <dd>Los archivos que ha sido modificados (actualizados/eliminados). La diferencia entre la última copia que existía y la que se acaba de realizar.</dd>
 </dl>
 
