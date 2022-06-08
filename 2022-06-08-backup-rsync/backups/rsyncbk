@@ -1,0 +1,47 @@
+#!/bin/sh
+# Custom Configuration
+#   HOSTNAME: Name of machine to bakcup
+#   BACKUPDIR: Directory to backup
+#   EXCLUDES: Paths to avoid in the backup
+#   ARCHIVEROOT:root directory to for backup stuff
+HOSTNAME=servidor
+BACKUPDIR=/
+EXCLUDES=/root/backups/excludes/$HOSTNAME.excluded
+ARCHIVEROOT=/root/backups
+
+# General Configuration (not touch unless you know what you are doing)
+#   CURRENT: directory which holds our current datastore
+#   INCREMENTDIR: directory which we save incremental changes to
+#   DIASBACKUP: Dias que se guardará el backup
+#   OPTIONS; Option to pass to rsync
+CURRENT=main
+INCREMENTDIR=`date +%Y-%m-%d`
+DIASBACKUP=30
+OPTIONS="--force --ignore-errors --delete --delete-excluded --exclude-from=$EXCLUDES --backup --backup-dir=$ARCHIVEROOT/$HOSTNAME/$INCREMENTDIR -av"
+
+## Make sure our backup tree exists
+do_rsync()
+{
+    echo "Comenzando backup de $HOSTNAME en $ARCHIVEROOT/$HOSTNAME/$CURRENT"
+    rsync $OPTIONS root@$HOSTNAME:$BACKUPDIR $ARCHIVEROOT/$HOSTNAME/$CURRENT
+    echo "Backup de $HOSTNAME finalizado"
+    echo ""
+}
+
+## some error handling and/or run backup and accounting
+if [ -f $EXCLUDES ]; then
+    if [ -d $BACKUPDIR ];then
+       #now the actual transfer
+       do_rsync
+       echo "Fin backup `date`"
+       echo "Eliminando backups antiguos…"
+       find $ARCHIVEROOT/$HOSTNAME -maxdepth 1 -mtime +$DIASBACKUP -name "????-??-??" -exec echo {} +;
+       find $ARCHIVEROOT/$HOSTNAME -maxdepth 1 -mtime +$DIASBACKUP -name "????-??-??" -exec rm -rf {} +;
+       echo "Fin de borrado backups antiguos"
+       echo `date` >  $ARCHIVEROOT/FinCopiaIncremental
+    else
+        echo "Can’t find $BACKUPDIR"; exit
+    fi
+else
+    echo "Can’t find $EXCLUDES"
+fi
