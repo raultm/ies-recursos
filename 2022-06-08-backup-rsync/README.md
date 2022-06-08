@@ -18,7 +18,7 @@ wget https://github.com/raultm/ies-recursos/releases/download/backups_1.0.0/back
 
 unzip  backups.zip
 
-scp -r ./backup root@*MAQUINA*:/root/backups
+scp -r ./backups root@*MAQUINA*:/root/backups
 ```
 
 ### Añadir al cron la tarea
