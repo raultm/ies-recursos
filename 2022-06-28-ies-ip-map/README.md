@@ -10,13 +10,6 @@ Tenemos Controlies para gestionar las MAC/IPs en el servidor DNS con LDAP. Pero 
 
 ## Uso
 
-### Ejecutar desde Internet
-
-```
-bash <(curl -s https://github.com/raultm/ies-recursos/releases/download/ies-ip-map_1.0.0/ies-ip-map)
-```
-
-
 ### Descargar y Ejecutar
 Descargar el comando, darle permisos de ejecución y ejecutar
 

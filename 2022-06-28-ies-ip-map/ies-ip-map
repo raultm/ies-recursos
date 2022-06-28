@@ -1,5 +1,4 @@
 #!/bin/bash
-# bash <(curl -s https://github.com/raultm/ies-recursos/releases/download/ies-ip-map_1.0.0/ies-ip-map)
 
 FROM=$1
 
