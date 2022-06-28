@@ -1,0 +1,19 @@
+#!/bin/bash
+# bash <(curl -s https://github.com/raultm/ies-recursos/releases/download/ies-ip-map_1.0.0/ies-ip-map)
+
+FROM=$1
+
+if [ -z "$FROM" ]
+then
+  FROM=$(ip -4 -o addr | awk ' {print $4}' | grep -v "127.0.0.1" | head -n 1 | cut -d"." -f3)
+fi
+
+TO=$(($FROM+1))
+
+for j in $(seq $FROM $TO); do
+  for i in $(seq 1 255); do
+    echo -e "172.19.$j.$i" '\t'  $(nslookup 172.19.$j.$i 172.19.$FROM.2 | grep name | tr -d " " |cut -d= -f2) 
+  done
+done
+
+
