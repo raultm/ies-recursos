@@ -1,0 +1,36 @@
+#!/bin/bash
+TIPO=$1
+UMBRAL=$2
+TYPE=$3
+ACTUAL=$4
+NOTIFICATIONCHANNEL=$5
+ARCHIVO=/root/utilidades/scripts/Alertas/flags/$TIPO
+
+
+#echo "${UMBRAL} ${TYPE} ${ACTUAL}"
+#echo "${UMBRAL} ${TYPE} ${ACTUAL}" | bc
+
+# Si el valor actual está por encima del valor umbral...
+if [ 1 -eq "$(echo "${UMBRAL} ${TYPE} ${ACTUAL}" | bc)" ]
+then
+  # ... y no existe el flag de que hemos avisado
+  if [ ! -f $ARCHIVO ]
+  then
+    # Mandamos notificación
+    /root/utilidades/scripts/Alertas/notification "[$TIPO][Error] El Valor Actual $ACTUAL está fuera del Valor Umbral $UMBRAL" $NOTIFICATIONCHANNEL
+    # Creamos el flag
+    echo "" > $ARCHIVO
+  fi
+# Si el valor actual es igual o menor que el valor umbral
+else
+  # y tenemos el flag de que estaba dando problemas
+  if [ -f $ARCHIVO ]
+  then
+     # Avisamos de la estabilización del valor
+    /root/utilidades/scripts/Alertas/notification "[$TIPO][Normal] El Valor Actual $ACTUAL ha entrado dentro del Umbral $UMBRAL" $NOTIFICATIONCHANNEL
+    # Borramos el flag
+    rm $ARCHIVO
+  fi
+fi
+
+

@@ -1,7 +1,23 @@
 #!/bin/bash
 
+# Load environment vars
+if [ -f .env ]
+then
+  source .env
+fi
+
 # Añadir al log /var/log/syslog
 logger --tag "ies" -s "$1"
 
 # Enviar notificacion telegram
-# /root/utilidades/telegram "$1"
+DEFAULTGROUP=$SYSADMINCHANNEL
+
+if [ -z "$2" ]
+then
+      GROUPID=$DEFAULTGROUP
+else
+      GROUPID=$2
+fi
+
+
+/root/utilidades/telegram "$1" $GROUPID

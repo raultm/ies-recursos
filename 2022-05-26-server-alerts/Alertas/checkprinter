@@ -1,0 +1,13 @@
+#!/bin/bash
+
+if [ -f .env ]
+then
+  source .env
+fi
+
+TIPO=$1
+UMBRAL=$2
+ACTUAL=$3
+NOTIFICATIONCHANNEL=$SECRETARYCHANNEL # Secretaria Channel
+
+/root/utilidades/scripts/Alertas/checkfeaturebelow $TIPO $UMBRAL $ACTUAL $NOTIFICATIONCHANNEL

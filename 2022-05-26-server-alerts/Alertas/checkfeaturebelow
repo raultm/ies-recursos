@@ -1,0 +1,9 @@
+#!/bin/bash
+
+TIPO=$1
+UMBRAL=$2
+ACTUAL=$3
+NOTIFICATIONCHANNEL=$4
+
+/root/utilidades/scripts/Alertas/checkthreshold $TIPO $UMBRAL ">" $ACTUAL $NOTIFICATIONCHANNEL # Empty channel is Admin Channel
+
