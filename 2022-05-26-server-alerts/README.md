@@ -44,12 +44,24 @@ Modificando **\/path\/to\/route\/** por la ruta donde lo hayas puesto tu.
 - **checks.d**: Carpeta donde pondremos las cosas que queremos monitorizar
 - **flags**: Para poder mandar notificaciones sólo en los cambios de estado necesitamos saber si estaba notificada la alerta o no. Aquí se crearán y destruirán archivos con este propósito. En principio vacío.
 - **triggerchecks**: Ejecuta todos los archivos **ejecutables** que haya en la carpeta `checks.d`
-- checkfeature: Recibe 3 parámetros
+- **checkthreshold**: Recibe 5 parámetros
   - **Nombre identificativo** de lo que monitorizamos: *cpu, ram, load*
   - **Valor umbral**: A partir de cuando queremos ser notificados
+  - **Tipo**: Si queremos que compruebe que pasa por arriba o por abajo el valor umbral. > o < (Queremos que nos avise cuando el porcentaje del disco SUPERE un porcentaje, pero queremos que nos avise cuando el tóner BAJE del umbral concreto )
   - **Valor actual**: El valor concreto en el momento de ejecutar el comando
-- **notification**: Comando que centraliza las notificaciones: *mail, logger, telegram*
+  - **Canal**: Podemos querer avisar a ciertos perfiles, si tenemos varios podemos indicar a quien queremos mandar el aviso de esta feature concreta
+- **checkfeature**: Se mantiene por compatibilidad, pero ahora es un alias de checkfeatureabove
+- **checkfeatureabove**: Recibe *identificador*, *umbral*, *valor* y *canal*. Comprueba si el valor está por encima del umbral. Llamada a checkthreshold.
+- **checkfeaturebelow**: Recibe *identificador*, *umbral*, *valor* y *canal*. Comprueba si el valor está por debajo del umbral. Llamada a checkthreshold.
+- **checkprinter**: Recibe *identificador*, *umbral*, *valor* y *canal*. Llama a **checkfeaturebelow** pero usando el canal de Secretaria.
+- **notification**: Comando que centraliza las notificaciones: *mail, logger, telegram*. Aparte del mensaje puede recibir un segundo parámetro indicando el canal al que hay que avisar.
 - **cron**: Comando que ha de añadirse al cron de nuestro servidor. En principio sólo llama a `triggerchecks` pero está abierto a añadir comandos antes y despues.
+
+TIPO=$1
+UMBRAL=$2
+TYPE=$3
+ACTUAL=$4
+NOTIFICATIONCHANNEL=$5
 
 # Checks de ejemplo
 He dejado varios checks de ejemplo para poder ver la funcionalidad

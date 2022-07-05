@@ -2,6 +2,10 @@
 #
 #   Get Black Toner Level of Brother Printers using snmp
 #
+#   Models checked
+#     - MFC-L2710DW
+#     - HL-L2370DN
+#
 #   > snmpwalk -v 2c -c public $MACHINE iso.3.6.1.4.1.2435.2.3.9.4.2.1.5.5.8.0
 #   iso.3.6.1.4.1.2435.2.3.9.4.2.1.5.5.8.0 = Hex-STRING: 63 01 04 00 00 00 01 41 01 04 00 00 22 60 11 01
 #   04 00 00 05 B3 31 01 04 00 00 00 07 6F 01 04 00
