@@ -19,7 +19,7 @@ Objetivos de este repo
 Descargar el zip y descomprimir
 
 ```
-wget https://github.com/raultm/ies-recursos/releases/download/alertas_1.0.0/Alertas.zip
+wget https://github.com/raultm/ies-recursos/releases/download/alertas_1.1.0/Alertas.zip
 
 unzip  Alertas.zip
 ```
