@@ -70,6 +70,7 @@ He dejado varios checks de ejemplo para poder ver la funcionalidad
 - **server-disk**: Comprueba si el porcentaje de uso de disco por encima de cierto umbral
 - **server-load**: Comprueba si el 2º load están por encima de cierto umbral
 - **server-ram**: Comprueba si el uso de RAM está por encima de cierto umbral
+- **printers-SalaProfesores-brother**: Comprueba sobre una brother el nivel de tóner
 
 # Habilitar/Deshabilitar check
 
