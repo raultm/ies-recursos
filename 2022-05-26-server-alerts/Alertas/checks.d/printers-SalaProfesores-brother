@@ -1,0 +1,8 @@
+#!/bin/bash
+
+min=15
+val=$(/root/utilidades/scripts/Alertas/helpers/printers/brother 172.19.1XX.YYY)
+
+
+/root/utilidades/scripts/Alertas/checkprinter "SalaProfesores-IDENTIFICADOR_${min}%" $min $val
+
