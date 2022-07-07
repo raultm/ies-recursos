@@ -12,7 +12,9 @@ El objetivo de este repositorio es tenerlas registradas
 
 Deben añadirse al archivo del pen drive `/boot/grub/grub.cfg`
 
-#### Imagen Oficial de Infolab
+#### Oficiales
+
+##### Imagen Oficial de Infolab
 
 ```
 menuentry "Imagen Oficial Infolab (sda) por NFS de Servidor"{
@@ -22,8 +24,19 @@ menuentry "Imagen Oficial Infolab (sda) por NFS de Servidor"{
 }
 ```
 
+#### Customizadas
 
-#### Desde carpeta /home/partimag del USB
+##### Imagen Workstation Actualizada Sin Conexion NFS (Trabajo Local)
+
+```
+menuentry "Imagen Oficial Infolab (sda) por NFS de Servidor"{
+	search --set -f /live/vmlinuz
+	linux /live/vmlinuz toram=filesystem.squashfs boot=live union=overlay username=user config components noswap edd=on nomodeset noprompt nosplash locales="es_ES.UTF-8" keyboard-layouts=es ocs_prerun1="dhclient -v" ocs_prerun2="mount -t nfs servidor:/var/isos/misisos /home/partimag" ocs_live_run="ocs-sr -g auto -e1 auto -e2 -r -j2 -k1 -scr -icds -p poweroff restoredisk infolab2022nonfs sda" ocs_live_extra_param="" ocs_live_batch="yes" gfxpayload=1024x768x16,1024x768 ip=frommedia i915.blacklist=yes radeonhd.blacklist=yes nouveau.blacklist=yes vmwgfx.blacklist=yes
+	initrd /live/initrd.img
+}
+```
+
+### Desde carpeta /home/partimag del USB
 
 ```
 menuentry "Imagen Oficial Infolab (sda sdb) por USB"{
