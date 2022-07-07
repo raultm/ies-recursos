@@ -23,6 +23,17 @@ menuentry "Imagen Oficial Infolab (sda) por NFS de Servidor"{
 ```
 
 
+#### Desde carpeta /home/partimag del USB
+
+```
+menuentry "Imagen Oficial Infolab (sda sdb) por USB"{
+  search --set -f /live/vmlinuz
+  linux /live/vmlinuz boot=live union=overlay username=user config components quiet noswap edd=on nomodeset noeject locales=es_ES.UTF-8 keyboard-layouts=NONE ocs_live_run="ocs-live-restore" ocs_live_extra_param="-g auto -e1 auto -e2 -r -j2 -k1 -scr -icds -p poweroff restoredisk InfolabLinux-12-06-2018 sda sdb" ocs_live_batch="yes" ocs_live_keymap="es_ES.UTF-8" vga=788 ip= net.ifnames=0 splash i915.blacklist=yes radeonhd.blacklist=yes nouveau.blacklist=yes vmwgfx.enable_fbdev=1
+  initrd /live/initrd.img
+}
+```
+
+
 
 
 
