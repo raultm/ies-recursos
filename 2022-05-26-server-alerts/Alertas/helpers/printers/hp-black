@@ -1,0 +1,32 @@
+#!/bin/bash
+#
+#   Get Black Toner Level of HP printers using snmp
+#
+#   Models checked
+#     - HP X476dw
+#
+#   Current Toner Level  1.3.6.1.2.1.43.11.1.1.9.1.4
+#   Max Toner Level      1.3.6.1.2.1.43.11.1.1.8.1.4
+#   % = Current/Max *100
+#
+#   > snmpwalk -v 2c -c public $MACHINE $OIDVALUE
+#   iso.3.6.1.2.1.43.11.1.1.9.1.4 = INTEGER: 2264
+#
+#   > cut -d" " -f4
+#   2264
+#
+#   > echo '5/10' | bc -l | cut -d. -f1 (-l allow decimal results,after cut to only return integer)
+#   50
+#
+MACHINE=$1
+
+CURRENTOID="1.3.6.1.2.1.43.11.1.1.9.1.4"
+MAXOID="1.3.6.1.2.1.43.11.1.1.8.1.4"
+
+CURRENTVALUE=`snmpwalk -v 2c -c public $MACHINE $CURRENTOID | cut -d" " -f4`
+MAXVALUE=`snmpwalk -v 2c -c public $MACHINE $MAXOID | cut -d" " -f4`
+
+BLACKTONERLEVEL=`echo "$CURRENTVALUE/$MAXVALUE *100/1" | bc -l | cut -d. -f1`
+
+echo $BLACKTONERLEVEL
+
