@@ -1,4 +1,4 @@
-class apagado_maquinas {
+class puppet_apagado_maquinas {
 
 #Apagado de máquinas por la mediodía.
         cron { apagado-mediodia:

@@ -24,7 +24,7 @@ Las horas de apagado están puestas a las 15:00 de la tarde y a las 23:00 de la 
 Si las 15:00 se queda corto por cualquier razón tan solo es modificar la hora o el minuto del apagado.
 
 ```
-class apagado_maquinas {
+class puppet_apagado_maquinas {
 
 #Apagado de máquinas por la mediodía.
     cron { apagado-mediodia:
