@@ -13,7 +13,7 @@ En los institutos solemos tener unas horas muy concretas de uso, nos viene bien 
 Descargar el zip y descomprimir
 
 ```
-wget https://github.com/raultm/ies-recursos/releases/download/apagado_maquinas_1.0.0/puppet_apagado_maquinas.zip
+wget https://github.com/raultm/ies-recursos/releases/download/apagado_maquinas_1.0.1/puppet_apagado_maquinas.zip
 
 unzip  puppet_apagador_maquinas.zip
 ```
