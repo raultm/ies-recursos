@@ -15,7 +15,7 @@ Descargar el zip y descomprimir
 ```
 wget https://github.com/raultm/ies-recursos/releases/download/apagado_maquinas_1.0.0/puppet_apagado_maquinas.zip
 
-unzip  puppet_apagador_maquinas.zip
+unzip  puppet_apagado_maquinas.zip
 ```
 
 ### Ajustar la hora de apagado
