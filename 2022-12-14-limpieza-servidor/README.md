@@ -5,7 +5,7 @@ Un conjunto de scripts usados para realizar una limpieza de los homes de los usu
 
 La idea es usarlo de manera periodica, en nuestro caso una vez a la semana, aprovechamos los sabados que no hay nadie en el edificio.
 
-Apaarte de eliminar archivos que no son indispensables registramos varias cosas que nos ayudan en nuestra tarea
+Aparte de eliminar archivos que no son indispensables registramos varias cosas que nos ayudan en nuestra tarea
 
 - Registramos el espacio antes de la limpieza
 - Registramos el espacio despues de la limpieza
@@ -27,16 +27,16 @@ wget https://github.com/raultm/ies-recursos/releases/download/limpieza_servidor_
 unzip  LimpiezaSemanal.zip
 ```
 
-### Pasamos el modulo a nuestra carpeta de módulos del servidor
+### Pasamos la carpeta al servidor
 
-Copiar la carpeta `LimpiezaSemanal` en la carpeta de nuestro servidor puppet `/root/utilidades/`
+Copiar la carpeta `LimpiezaSemanal` en la carpeta de nuestro servidor puppet `/root/utilidades/scripts/`
 
 ```
 scp -r ./LimpiezaSemanal root@servidor:/root/utilidades/scripts/
 ```
 
 
-### Añadir al cront la tarea
+### Añadir al cron la tarea
 
 Abrimos el cron de nuestro servidor
 
