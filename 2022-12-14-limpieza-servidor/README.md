@@ -1,45 +1,54 @@
 
-# Puppet_linex_arduino
+# Limpieza del Servidor
 
-Es un paquete puppet que configura un sistema ubuntu para instalar linex_arduino, la versión arduino de la seccion
+Un conjunto de scripts usados para realizar una limpieza de los homes de los usuarios.
 
-- En el paquete se obliga a que se asegure la instalación del paquete.
-- Como en los equipos puede estar el pkgsync funcionando creo un archivo en mayhave.d
+La idea es usarlo de manera periodica, en nuestro caso una vez a la semana, aprovechamos los sabados que no hay nadie en el edificio.
+
+Apaarte de eliminar archivos que no son indispensables registramos varias cosas que nos ayudan en nuestra tarea
+
+- Registramos el espacio antes de la limpieza
+- Registramos el espacio despues de la limpieza
+- Listado ordenador del uso de los homes de los profesores
+- Listado ordenador del uso de los homes de los profesores
+
+Todo esto guardado como un histórico, en cada fecha se genera una carpeta y ahí se guarda toda la información
 
 ## Casos de Uso
-- Ordenadores de uso de tecnología o similares que hagan uso de arduino
+- Limpieza para recuperar espacio del servidor
+- Información rápida para saber usuarios que mas espacio estan usando sin tener que hacer un du durante el uso
 
 ### Descargar y Descomprimir
 Descargar el zip y descomprimir
 
 ```
-wget https://github.com/raultm/ies-recursos/releases/download/puppet_linex_arduino_1.0.0/puppet_linex_arduino.zip
+wget https://github.com/raultm/ies-recursos/releases/download/limpieza_servidor_1.0.0/LimpiezaSemanal.zip
 
-unzip  puppet_linex_arduino.zip
+unzip  LimpiezaSemanal.zip
 ```
 
 ### Pasamos el modulo a nuestra carpeta de módulos del servidor
 
-Copiar la carpeta `puppet_linex_arduino` en la carpeta de nuestro servidor puppet `/etc/puppet/modules`
+Copiar la carpeta `LimpiezaSemanal` en la carpeta de nuestro servidor puppet `/root/utilidades/`
 
 ```
-scp -r ./puppet_linex_arduino root@servidor:/etc/puppet/modules/
+scp -r ./LimpiezaSemanal root@servidor:/root/utilidades/scripts/
 ```
 
 
-### Añadir a la clase/clases que queramos
+### Añadir al cront la tarea
 
-Añadir el módulo en donde queramos, si queremos añadirlo a todos los equipos con xubuntu18 tendríamos que añadir en el archivo `/etc/puppet/manifests/classes/xubuntu1804/especifica-xubuntu-linex-2018.pp` la línea
+Abrimos el cron de nuestro servidor
 
 ```
-include puppet_linex_arduino
+crontab -e
 ```
 
-La próxima vez que los clientes hagan puppet ya tendran todo configurado.
+Añadir la tarea el sabado a las 8 de la mañana
 
-## ¿Qué hace el paquete?
-
-- En el paquete se obliga a que se asegure la instalación del paquete.
-- Como en los equipos puede estar el pkgsync funcionando creo un archivo en mayhave.d
+```
+# Limpieza de fin de semana
+0 8 * * 6 /root/utilidades/scripts/LimpiezaSemanal/cleanhome
+```
 
 
