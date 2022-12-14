@@ -29,7 +29,7 @@ unzip  LimpiezaSemanal.zip
 
 ### Pasamos la carpeta al servidor
 
-Copiar la carpeta `LimpiezaSemanal` en la carpeta de nuestro servidor puppet `/root/utilidades/scripts/`
+Copiar la carpeta `LimpiezaSemanal` en la carpeta de nuestro servidor `/root/utilidades/scripts/`
 
 ```
 scp -r ./LimpiezaSemanal root@servidor:/root/utilidades/scripts/
