@@ -1,0 +1,22 @@
+#!/bin/bash
+
+FOLDER=`date +%Y-%m-%d`
+mkdir -p /root/utilidades/scripts/LimpiezaSemanal/info/$FOLDER
+
+function dfusage {
+    echo `date` `df -h | grep "/home"` 
+}
+
+function clean {
+    /root/utilidades/scripts/LimpiezaSemanal/limpiar_usuarios
+}
+
+function duusers {
+    du -sm /home/profesor/* | sort -nr > /root/utilidades/scripts/LimpiezaSemanal/info/$FOLDER/profesor.du
+    du -sm /home/alumnos/* | sort -nr > /root/utilidades/scripts/LimpiezaSemanal/info/$FOLDER/alumno.du
+}
+
+echo $(dfusage) >> /root/utilidades/scripts/LimpiezaSemanal/info/$FOLDER/info.md
+clean
+duusers
+echo $(dfusage) >> /root/utilidades/scripts/LimpiezaSemanal/info/$FOLDER/info.md

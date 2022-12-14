@@ -1,0 +1,215 @@
+#!/bin/bash
+
+# Borra los directorios thumbnails (visor de fotos), papelera, cache de java, cache de mozilla,
+# cache de openoffice y libreoffice, cache de gnome, cache de flash, cache de evolution, cache de google-earth.
+# Borra del navegador firefox y google chrome ficheros corruptos y plugins instalados por el usuario.
+# Comprime las bases de datos del navegador firefox (sqlite).
+# Borra ficheros innecesarios de la openoffice y libreoffice.
+# Borra sesiones salvadas del nautilus y de metacity.
+# Para los alumnos vacía enviados profesor y recibidos profesor de aulalinex.
+#
+# -------------------------------------------------------------------------------------------------------------
+#
+# Se ejecuta en el servidor. 
+# Francisco Rodrigo
+
+
+function limpia_usuario() {
+
+        i=$1
+
+	echo "Borrando del usuario $i"
+
+	#Borramos miniaturas de ficheros de imágenes
+	rm -rf $i/.thumbnails
+	rm -rf $i/.shotwell/thumbs
+	rm -rf $i/.openshot/thumbnail
+	find $i/. -name "Thumbs.db" -exec rm -rf {} +;
+
+	#Borramos papeleras
+#	rm -rf $i/.local/share/Trash
+#	rm -rf $i/.gconf/apps/nautilus/desktop-metadata/trash
+	rm -rf $i/.gconf/apps/evolution/mail/trash
+	rm -rf $i/.icedove/*.default/Mail/*/Trash
+	rm -rf $i/.icedove/*.default/ImapMail/*/Trash
+
+	#Borramos montajes virtuales
+	#rm -rf $i/.local/share/gvfs-metadata
+
+        #Borramos ficheros de configuracion de arduino
+	#para evitar problemas con mblock
+	rm -rf $i/.arduino
+	rm -rf $i/.arduino15
+
+	#Borramos distintas caches
+	rm -rf $i/.java/deployment/cache
+	rm -rf $i/.mozilla/firefox/*.default*/Cache
+	rm -rf $i/.mozilla/firefox/*.default*/Cache.Trash
+	rm -rf $i/.config/google-chrome/Default/Application Cache/Cache
+	rm -rf $i/.config/google-chrome/Default/Storage/ext/chrome-signin/def/Cache
+        rm -rf $i/.cache
+	rm -rf $i/.googleearth/Cache
+	rm -rf $i/.adobe/Flash_Player/AssetCache
+	rm -rf $i/Dropbox/.dropbox.cache/
+	rm -rf $i/.miro/icon-cache/
+	rm -rf $i/.vlc/cache
+	rm -rf $i/.gftp/cache
+	rm -rf $i/.gnome2/goobox.d/cache
+	rm -rf $i/.adobe/Acrobat/9.0/Cache
+	rm -rf $i/.adobe/Acrobat/8.0/Cache
+	rm -rf $i/.icedove/*.default/Cache
+        rm -rf $i/.config/libreoffice/4/user/uno_packages/cache
+	rm -rf $i/.ooo4kids/1.0/user/uno_packages/cache
+	rm -rf $i/.ooo4kids/1.0/user/registry/cache
+	rm -rf $i/.icedtea/cache
+	rm -rf $i/.netx/cache
+	rm -rf $i/.config/Gpredict/satdata/cache
+
+	#Borramos temporales
+	rm -rf $i/.googleearth/Temp/*
+	rm -rf $i/.wine/drive_c/windows/temp
+	rm -rf $i/.kde/share/apps/k3b/temp
+	rm -rf $i/.config/libreoffice/4/user/temp
+	rm -rf $i/.adobe/Acrobat/9.0/Collab/Temp
+	rm -rf $i/.adobe/Acrobat/9.0/Temp
+	rm -rf $i/.adobe/Acrobat/8.0/Preferences/Collab/Temp
+	rm -rf $i/.config/google-chrome/Temp
+	rm -rf $i/.config/google-chrome/Default/Extensions/Temp
+	rm -rf $i/.ooo4kids/1.0/user/temp
+	rm -rf $i/.gramps/temp
+        rm -rf $i/tmp/*
+
+	#Borramos instalaciones antiguas de dropbox
+	rm -rf $i/.dropbox-dist-old*
+
+	#Borramos objetos de flash player
+	rm -rf $i/.macromedia/Flash_Player/#SharedObjects
+
+	#Borramos ficheros incompletos de miro
+	rm -rf $i/.miro/Movies/Incomplete*
+
+	## MOZILLA FIREFOX
+
+	#Borramos plugins del navegador instalados por el usuario.
+	rm -rf $i/.mozilla/firefox/*.default*/pluginreg.dat
+	#Borramos ficheros corruptos y el journal para evitar errores.
+	rm -rf $i/.mozilla/firefox/*.default*/*.corrupt
+	rm -rf $i/.mozilla/firefox/*.default*/*.journal
+	#Borramos ficheros que se han quedado sin cerrarse
+	rm -rf $i/.mozilla/firefox/*.default*/*-shm
+	rm -rf $i/.mozilla/firefox/*.default*/*-wal
+        # Si queremos comprimir la base de datos sqlite del firefox hacemos lo siguiente (necesita tener instalado sqlite3 en el servidor nfs):
+	if [ -f $i/.mozilla/firefox/*.default*/places.sqlite ]; then
+	        for f in $i/.mozilla/firefox/*.default*/*.sqlite;
+			do
+				sqlite3 $f 'VACUUM;' 2> /tmp/error_sqlite;
+				if [ ! -z /tmp/error_sqlite ]; then
+					rm -rf $i/.mozilla/firefox/*.default*/$f;
+				fi
+			 done
+	fi
+        # Si queremos borrar las bases de datos del firefox hacemos esto otro:
+   	#rm -rf $i/.mozilla/firefox/*.default*/*.sqlite*
+	#Desbloqueamos firefox por si se queda colgado
+        rm -rf $i/.mozilla/firefox/*.default*/lock
+	#Borramos ficheros bloqueados del fuse para firefox
+        rm -rf $i/.mozilla/firefox/*.default*/.fuse_hidden*
+	#Borramos ficheros que se han quedado sin cerrarse. Lo ejecutamos de nuevo por si da error la compresion de sqlite
+	rm -rf $i/.mozilla/firefox/*.default*/*-shm
+	rm -rf $i/.mozilla/firefox/*.default*/*-wal
+
+	## GOOGLE CHROME
+
+	#Borramos ficheros bloqueados del fuse para chrome
+        rm -rf $i/.config/google-chrome/.fuse_hidden*
+	#Borramos ficheros bloqueados del nfs para chrome
+        rm -rf $i/.config/google-chrome/.nfs*
+	#Desbloqueamos chrome por si se queda colgado
+        rm -rf $i/.config/google-chrome/Singleton*
+	#Borramos los ficheros para restablecer google-chrome
+        rm -rf $i/.config/google-chrome/Safe*
+	#Borramos los ficheros para restablecer google-chrome
+        rm -rf $i/.config/google-chrome/Last*
+	#Borramos los ficheros de thumbnails
+        rm -rf $i/.config/google-chrome/Thumbnails
+	#Borramos los ficheros corruptos
+        rm -rf $i/.config/google-chrome/*-journal
+	#Borramos cache e historial generado por las API's
+#       rm -rf $i/.config/google-chrome/Default/File\ System
+
+	## OPEN OFFICE
+	#Borramos openoffice por sustitucion de libreoffice
+	rm -rf $i/.openoffice.org
+	#Configuracion antigua openoffice 2
+	rm -rf $i/.openoffice.org2
+	# Borramos openoffice 4 kids
+#	rm -rf $i/.ooo4kids
+
+	## LIBRE OFFICE
+
+	#Borramos libreoffice 3 por sustitucion de libreoffice 4
+	rm -rf $i/.libreoffice
+        rm -rf $i/.config/libreoffice/4/user/backup
+
+
+	#Ficheros bloqueados de Pandectas
+	rm -rf $i/tmp/Sys/Config.ini.lock;
+
+	#Ficheros bloqueados de la libreoffice
+	find $i/. -name ".~lock.*" -exec rm -rf {} +;
+
+	#Ficheros incompletos de iceweasel
+	find $i/. -name "*.part"  -exec rm -rf {} +;
+
+	#Ficheros bloqueados del nfs
+	find $i/. -name ".nfs*" -exec rm -rf {} +;
+
+	#Fichero debug de pdfs
+	find $i/. -name "*debuglog.txt" -exec rm -rf {} +;
+
+	#Sesiones salvadas del nautilus
+	rm -rf $i/.nautilus/saved-session-*
+
+	#Sesiones de metacity
+	rm -rf $i/.metacity/sessions
+
+	#Salida Escritorio
+	rm -rf $i/.config/salida_escritorio
+
+	# 2022-12
+	#Borramos la cache de firefox, que ya no está ubicada en ~/.cache
+	rm -rf $i/.mozilla/firefox/*.default*/storage/default/*
+
+
+	#Borramos la cache de Chrome, que ya no está ubicada en ~/.cache
+	rm -rf $i/.config/google-chrome/Default/Service\ Worker/CacheStorage/*
+	#Borramos los predictions models
+	rm -rf $i/.config/google-chrome/Default/optimization_guide_prediction_model_downloads/*
+
+	#Directorio wine
+	#rm -rf $i/.wine
+}
+
+
+cd /home/profesor/
+for i in *
+do
+  test "$i" = "dpto" && continue
+  limpia_usuario $i
+done
+cd -
+
+cd /home/alumnos/
+for i in *
+do
+   limpia_usuario $i
+done
+cd -
+
+cd /home/staff/
+for i in *
+do
+   limpia_usuario $i
+done
+cd -
+
